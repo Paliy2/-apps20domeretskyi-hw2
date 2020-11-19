@@ -36,6 +36,12 @@ public class ImmutableLinkedListTest {
     }
 
     @Test
+    public void testAddZeroIndex() {
+        ImmutableLinkedList newList = emptyList.add(0, "Here");
+        assertEquals(newList.toString(), "[Here]");
+    }
+
+    @Test
     public void testAddAt() {
         ImmutableLinkedList newList = stringList.add(3, '!');
         System.out.println(newList);
@@ -149,4 +155,44 @@ public class ImmutableLinkedListTest {
         Object[] arr = stringList.toArray();
         assertArrayEquals(arr, new Object[]{"Never", "stop", "learning"});
     }
+
+    @Test
+    public void testSetSize() {
+        emptyList.setSize(0);
+        assertEquals(emptyList.size(), 0);
+        assertEquals(emptyList.getSize(), 0);
+    }
+
+    @Test
+    public void testSetHead() {
+        emptyList.setHead(null);
+        assertNull(emptyList.getHead());
+    }
+
+    @Test(expected = IndexOutOfBoundsException.class)
+    public void checkIndexBoundsError() {
+        emptyList.get(1);
+    }
+
+    @Test
+    public void checkIndexBounds() {
+        Object a = stringList.get(1);
+        assertEquals(a, "stop");
+    }
+
+    @Test
+    public void testInitWithNode() {
+        Node newHead = new Node(10);
+        ImmutableLinkedList resList = new ImmutableLinkedList(newHead);
+        assertEquals(resList.toString(), "[10]");
+        assertEquals(resList.getHead().getValue(), 10);
+        assertNull(resList.getHead().getNext());
+    }
+
+    @Test
+    public void testInitWithNull() {
+        Object[] toAdd = new Object[0];
+        ImmutableList resList = new ImmutableLinkedList(toAdd);
+    }
 }
+

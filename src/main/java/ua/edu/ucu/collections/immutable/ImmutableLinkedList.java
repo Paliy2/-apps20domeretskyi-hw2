@@ -9,7 +9,7 @@ public class ImmutableLinkedList implements ImmutableList {
         this.size = 0;
     }
 
-    private ImmutableLinkedList(Node n) {
+    ImmutableLinkedList(Node n) {
         head = n;
     }
 
