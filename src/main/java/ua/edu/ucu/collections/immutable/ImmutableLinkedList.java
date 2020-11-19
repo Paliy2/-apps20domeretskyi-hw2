@@ -1,8 +1,8 @@
 package ua.edu.ucu.collections.immutable;
 
 public class ImmutableLinkedList implements ImmutableList {
-    Node head;
-    int size;
+    private Node head;
+    private int size;
 
     public ImmutableLinkedList() {
         this.head = null;
@@ -18,8 +18,8 @@ public class ImmutableLinkedList implements ImmutableList {
             this.head = new Node(c[0]);
             Node current = this.head;
             for (int i = 1; i < c.length; i++) {
-                current.next = new Node(c[i]);
-                current = current.next;
+                current.setNext(new Node(c[i]));
+                current = current.getNext();
             }
         }
         this.size = c.length;
@@ -34,14 +34,14 @@ public class ImmutableLinkedList implements ImmutableList {
 
         ImmutableLinkedList resList = new ImmutableLinkedList();
         resList.size = size;
-        resList.head = new Node(this.head.value);
-        Node nodeOriginal = this.head.next;
+        resList.head = new Node(this.head.getValue());
+        Node nodeOriginal = this.head.getNext();
         Node nodeNew = resList.head;
 
         while (nodeOriginal != null) {
-            nodeNew.next = new Node(nodeOriginal.value);
-            nodeNew = nodeNew.next;
-            nodeOriginal = nodeOriginal.next;
+            nodeNew.setNext(new Node(nodeOriginal.getValue()));
+            nodeNew = nodeNew.getNext();
+            nodeOriginal = nodeOriginal.getNext();
         }
 
         return resList;
@@ -65,7 +65,7 @@ public class ImmutableLinkedList implements ImmutableList {
         }
         // special case
         else if (index == 0) {
-            nodeNew.next = nodeTemp;
+            nodeNew.setNext(nodeTemp);
             ImmutableLinkedList lst = new ImmutableLinkedList(nodeNew);
             lst.size = this.size + 1;
             return lst;
@@ -75,12 +75,12 @@ public class ImmutableLinkedList implements ImmutableList {
             while (nodeTemp != null) {
                 // till last index
                 if (counter == index - 1) {
-                    Node current = nodeTemp.next;
-                    nodeTemp.next = nodeNew;
-                    nodeTemp.next.next = current;
+                    Node current = nodeTemp.getNext();
+                    nodeTemp.setNext(nodeNew);
+                    nodeTemp.getNext().setNext(current);
                 }
 
-                nodeTemp = nodeTemp.next;
+                nodeTemp = nodeTemp.getNext();
                 counter++;
             }
         }
@@ -109,11 +109,10 @@ public class ImmutableLinkedList implements ImmutableList {
         ImmutableLinkedList resList = copy();
 
         Node current = resList.head;
-        while (index != 0) {
-            current = current.next;
-            index--;  //!!
+        while (index-- != 0) {
+            current = current.getNext();
         }
-        return current.value;
+        return current.getValue();
     }
 
 
@@ -125,18 +124,18 @@ public class ImmutableLinkedList implements ImmutableList {
         int counter = 0;
 
         if (index == 0) {
-            ImmutableLinkedList lst = new ImmutableLinkedList(current.next);
+            ImmutableLinkedList lst = new ImmutableLinkedList(current.getNext());
             lst.size = this.size - 1;
             return lst;
         }
 
         while (counter != index - 1) {
-            current = current.next;
+            current = current.getNext();
             counter++;
         }
         // remove
         Node prev = current;
-        prev.next = current.next.next;
+        prev.setNext(current.getNext().getNext());
         resList.size--;
         return resList;
     }
@@ -147,12 +146,11 @@ public class ImmutableLinkedList implements ImmutableList {
         ImmutableLinkedList resList = copy();
         Node current = resList.head;
 
-        while (index != 0) {
-            current = current.next;
-            index--;
+        while (index-- != 0) {
+            current = current.getNext();
         }
 
-        current.value = e;
+        current.setValue(e);
         return resList;
     }
 
@@ -162,8 +160,8 @@ public class ImmutableLinkedList implements ImmutableList {
         int counter = 0;
 
         // get object with index
-        while (current != null && !current.value.equals(e)) {
-            current = current.next;
+        while (current != null && !current.getValue().equals(e)) {
+            current = current.getNext();
             counter++;
         }
 
@@ -197,8 +195,8 @@ public class ImmutableLinkedList implements ImmutableList {
 
         int i = 0;
         while (current != null) {
-            array[i] = current.value;
-            current = current.next;
+            array[i] = current.getValue();
+            current = current.getNext();
             i++;
         }
 
@@ -217,8 +215,8 @@ public class ImmutableLinkedList implements ImmutableList {
         StringBuilder resText = new StringBuilder();
         resText.append("[");
         while (current != null) {
-            resText.append(current.value.toString()).append(", ");
-            current = current.next;
+            resText.append(current.getValue().toString()).append(", ");
+            current = current.getNext();
         }
 
         return resText.substring(0, resText.length() - 2) + "]";
@@ -228,5 +226,21 @@ public class ImmutableLinkedList implements ImmutableList {
         if (index > this.size || index < 0) {
             throw new IndexOutOfBoundsException();
         }
+    }
+
+    public Node getHead() {
+        return this.head;
+    }
+
+    public void setHead(Node newNode) {
+        this.head = newNode;
+    }
+
+    public int getSize() {
+        return this.size;
+    }
+
+    public void setSize(int newSize) {
+        this.size = newSize;
     }
 }
