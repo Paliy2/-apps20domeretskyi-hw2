@@ -109,7 +109,8 @@ public class ImmutableLinkedList implements ImmutableList {
         ImmutableLinkedList resList = copy();
 
         Node current = resList.head;
-        while (index-- != 0) {
+        int counter = index;
+        while (counter-- != 0) {
             current = current.getNext();
         }
         return current.getValue();
@@ -124,7 +125,8 @@ public class ImmutableLinkedList implements ImmutableList {
         int counter = 0;
 
         if (index == 0) {
-            ImmutableLinkedList lst = new ImmutableLinkedList(current.getNext());
+            ImmutableLinkedList lst =
+                    new ImmutableLinkedList(current.getNext());
             lst.size = this.size - 1;
             return lst;
         }
@@ -146,7 +148,8 @@ public class ImmutableLinkedList implements ImmutableList {
         ImmutableLinkedList resList = copy();
         Node current = resList.head;
 
-        while (index-- != 0) {
+        int counter = index;
+        while (counter-- != 0) {
             current = current.getNext();
         }
 
