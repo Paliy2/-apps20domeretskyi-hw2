@@ -25,8 +25,4 @@ public class Queue {
         // add last
         lst = lst.add(e);
     }
-
-    public ImmutableLinkedList getLst() {
-        return this.lst;
-    }
 }

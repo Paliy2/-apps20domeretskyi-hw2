@@ -3,6 +3,8 @@ package ua.edu.ucu.collections.immutable;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.lang.reflect.Method;
+
 import static org.junit.Assert.*;
 
 public class ImmutableLinkedListTest {
@@ -172,6 +174,8 @@ public class ImmutableLinkedListTest {
     @Test(expected = IndexOutOfBoundsException.class)
     public void checkIndexBoundsError() {
         emptyList.get(1);
+        stringList.get(-1);
+        stringList.get(100);
     }
 
     @Test

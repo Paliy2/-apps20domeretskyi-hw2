@@ -12,13 +12,7 @@ public class ImmutableArrayList implements ImmutableList {
 
     ImmutableArrayList(Object[] elements) {
         this.array = new Object[elements.length];
-
-        for (int i = 0; i < elements.length; i++) {
-            if (elements[i] == null) {
-                break;
-            }
-            this.array[i] = elements[i];
-        }
+        System.arraycopy(elements, 0, this.array, 0, elements.length);
     }
 
     @Override

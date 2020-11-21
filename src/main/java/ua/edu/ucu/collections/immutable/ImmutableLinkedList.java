@@ -160,19 +160,16 @@ public class ImmutableLinkedList implements ImmutableList {
     public int indexOf(Object e) {
         ImmutableLinkedList resList = copy();
         Node current = resList.head;
-        int counter = 0;
 
-        // get object with index
-        while (current != null && !current.getValue().equals(e)) {
+        int counter = 0;
+        while (current != null) {
+            if (current.getValue().equals(e)) {
+                return counter;
+            }
             current = current.getNext();
             counter++;
         }
-
-        if (counter == resList.size && resList.get(this.size - 1) != e) {
-            return -1;
-        }
-
-        return counter;
+        return -1;
     }
 
     public int size() {
@@ -184,10 +181,6 @@ public class ImmutableLinkedList implements ImmutableList {
     }
 
     public boolean isEmpty() {
-        // in case sth wrong happens
-        if (this.size < 0) {
-            this.size = 0;
-        }
         return this.size == 0;
     }
 
