@@ -10,20 +10,17 @@ public class Stack {
     }
 
     Object peek() {
-        // get first
-        return list.get(0);
+        return list.getFirst();
     }
 
     Object pop() {
-        Object resultElement = list.get(0);
-        // remove first
-        list = list.remove(0);
+        Object resultElement = list.getFirst();
+        list = list.removeFirst();
         return resultElement;
     }
 
     void push(Object e) {
-        // add first
-        list = list.add(0, e);
+        list = list.addFirst(e);
     }
 
 

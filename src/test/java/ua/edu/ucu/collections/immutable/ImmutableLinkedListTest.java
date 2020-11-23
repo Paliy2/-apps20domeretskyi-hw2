@@ -30,6 +30,31 @@ public class ImmutableLinkedListTest {
     }
 
     @Test
+    public void testAddFirst() {
+        ImmutableLinkedList newList = stringList.addFirst("Because");
+        assertEquals(newList.toString(), "[Because, Never, stop, learning]");
+    }
+
+    @Test
+    public void testAddLast() {
+        ImmutableLinkedList newList = stringList.addLast("Because");
+        assertEquals(newList.toString(), "[Never, stop, learning, Because]");
+    }
+
+    @Test
+    public void testRemoveFirst() {
+        ImmutableLinkedList newList = stringList.removeFirst();
+        assertEquals(newList.toString(), "[stop, learning]");
+    }
+
+    @Test
+    public void testRemoveLast() {
+        ImmutableLinkedList newList = stringList.removeLast();
+        assertEquals(newList.toString(), "[Never, stop]");
+    }
+
+
+    @Test
     public void testAddEmpty() {
         ImmutableLinkedList newList = emptyList.add(1);
         newList = newList.add('a');

@@ -239,4 +239,28 @@ public class ImmutableLinkedList implements ImmutableList {
     public void setSize(int newSize) {
         this.size = newSize;
     }
+
+    public ImmutableLinkedList addFirst(Object e) {
+        return add(0, e);
+    }
+
+    public ImmutableLinkedList addLast(Object e) {
+        return add(e);
+    }
+
+    public Object getFirst() {
+        return get(0);
+    }
+
+    public Object getLast() {
+        return get(this.size() - 1);
+    }
+
+    public ImmutableLinkedList removeFirst() {
+        return remove(0);
+    }
+
+    public ImmutableLinkedList removeLast() {
+        return remove(this.size() - 1);
+    }
 }

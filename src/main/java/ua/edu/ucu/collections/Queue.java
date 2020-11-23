@@ -10,19 +10,16 @@ public class Queue {
     }
 
     public Object peek() {
-        // get first
-        return lst.get(0);
+        return lst.getFirst();
     }
 
     public Object dequeue() {
-        // del first
-        Object res = lst.get(0);
-        lst = lst.remove(0);
+        Object res = lst.getFirst();
+        lst = lst.removeFirst();
         return res;
     }
 
     public void enqueue(Object e) {
-        // add last
-        lst = lst.add(e);
+        lst = lst.addLast(e);
     }
 }
