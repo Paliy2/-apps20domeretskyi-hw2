@@ -53,6 +53,17 @@ public class ImmutableLinkedListTest {
         assertEquals(newList.toString(), "[Never, stop]");
     }
 
+    @Test
+    public void testGetLast() {
+        Object res = stringList.getLast();
+        assertEquals(res, "learning");
+    }
+
+    @Test
+    public void testGetFirst() {
+        Object res = stringList.getFirst();
+        assertEquals(res, "Never");
+    }
 
     @Test
     public void testAddEmpty() {
